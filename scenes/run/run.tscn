@@ -23,7 +23,6 @@ run_startup = ExtResource("2_wgfut")
 [node name="CurrentView" type="Node" parent="."]
 
 [node name="DebugButtons" type="VBoxContainer" parent="."]
-visible = false
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
@@ -122,7 +121,6 @@ visible = false
 [node name="PauseMenu" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 5
-visible = false
 script = ExtResource("11_a4w7h")
 
 [node name="ColorRect" type="ColorRect" parent="PauseMenu"]

@@ -107,7 +107,7 @@ func _get_fusion_result_texture(a, b,callback:Callable) -> Texture2D:
 	}
 	var ai_manager := get_tree().root.find_child("AIManager", true, false)
 	# 3. 调用AI多图融合
-	var images: Array[Texture2D] = [tex_a, tex_b]
+	var images: Array[Texture2D] = [tex_a, tex_b,original_tex]
 	ai_manager.generate_fusion_multiple_images(
 	images,
 	"pixel art character sprite, in the exact same art style as the two reference characters, front-facing, top-down view, 16x32 pixel resolution, white background, clean outline. Create a new original character that **maximally retains and naturally merges all core visual features, color palettes, line weights, and shading styles** from both reference characters. Automatically identify and preserve all key traits from each reference: including but not limited to hairstyle, facial features, clothing, accessories, body proportions, and color scheme. Ensure the new character has a cohesive, unified design that clearly inherits the identity of both source characters, with no distortion, missing features, or style deviation. Strictly maintain the original pixel art aesthetic, resolution, and visual consistency of the reference characters.",
@@ -164,8 +164,7 @@ func _refresh_slots():
 		right_slot.visible = true
 	else:
 		right_slot.visible = false
-# 自动把白色背景变成透明（像素风完美！）
-# 把白色背景变透明 · Godot 4 完美可用
+
 func make_texture_white_transparent(tex: Texture2D) -> Texture2D:
 	if not tex:
 		return null

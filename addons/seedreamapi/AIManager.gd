@@ -23,7 +23,7 @@ func texture_to_base64(tex: Texture2D) -> String:
 	var buffer = img.save_png_to_buffer()
 	return Marshalls.raw_to_base64(buffer)
 
-# 【修复版】Seedream 5.0 正确 多图融合 / 图片混合写法
+
 func generate_fusion_multiple_images(
 	input_textures: Array[Texture2D],
 	prompt: String,
@@ -32,13 +32,12 @@ func generate_fusion_multiple_images(
 	size: String = "1024x1024",
 	callback: Callable = Callable()
 ) -> void:
-	if input_textures.size() < 2:
+	if input_textures.size() < 3:
 		print("至少需要2张图片")
 		return
 
 	# 关键：Seedream 5.0 融合用 image_urls 数组!!!
 	var base64_array: Array[String] = []
-	print("begin")
 	for tex in input_textures:
 		var b64 = texture_to_base64(tex)
 		if b64:
@@ -74,7 +73,7 @@ func generate_fusion_multiple_images(
 func _on_http_request_request_completed(
 	result, response_code, headers, body: PackedByteArray
 ) -> void:
-	print("http begin")
+
 	var callback: Callable = Callable()
 	
 	if pending_requests.size() > 0:

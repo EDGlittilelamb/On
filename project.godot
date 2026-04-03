@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Monster"
 config/tags=PackedStringArray("gamelab")
-run/main_scene="res://scenes/run/run.tscn"
+run/main_scene="uid://4tj0qise1som"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.png"
 
