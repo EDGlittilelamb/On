@@ -1,50 +1,53 @@
 本游戏的特色为融合系统，灵感来源为《欧布奥特曼》里面的奥特融合。
 
 当玩家击败敌人时，会获得敌人的卡牌，在战斗中，可以利用敌人卡牌强化自己，并调用 img2img 模型更新玩家角色外观。融合后的玩家角色外观会保留敌人和玩家角色的特征。
-
 ## 融合系统拆解
-
 ### 1. 全局函数 Card_Library
 
 生成 `cards` 数组，保留已经击败的敌人的 texture。
 
-代码如下：
-
-```gdscript
+```
 extends Node
 const CardDataScript = preload("res://scripts/Card_Data.gd")
 var by_id: Dictionary = {} # StringName -> CardData
 var cards: Array[CardData] = []
 
 func add_card(id: StringName, icon: Texture2D, source_type: StringName) -> void:
-	if id == StringName() or icon == null:
-		return
-	if by_id.has(id):
-		return # 去重
-	var d = CardDataScript.new()	
-	d.id = id
-	d.icon = icon
-	d.source_type = source_type
-	by_id[id] = d
-	cards.append(d)
+    if id == StringName() or icon == null:
+        return
+    if by_id.has(id):
+        return # 去重
+    var d = CardDataScript.new()    
+    d.id = id
+    d.icon = icon
+    d.source_type = source_type
+    by_id[id] = d
+    cards.append(d)
 
 func infer_id_from_stats(stats: Resource, prefix: StringName) -> StringName:
-	if stats == null:
-		return prefix
-	var v = stats.get("id") # 如果没有这个字段会返回 null
-	if v != null and String(v) != "":
-		return StringName(String(v))
-	if stats.resource_path != "":
-		return StringName("%s_%s" % [String(prefix), stats.resource_path.get_file().get_basename()])
-	return prefix
-2. UI 设计
-节点 Fusion_UI，挂载到 Player 节点上。点击 Player 节点后显示 Fusion_UI 节点上的 FusionUp 子节点，再次点击 FusionUp 节点后显示 cards 数组里面已经击败的敌人 CustomCard 资源。
+    if stats == null:
+        return prefix
+    var v = stats.get("id")
+    if v != null and String(v) != "":
+        return StringName(String(v))
+    if stats.resource_path != "":
+        return StringName("%s_%s" % [String(prefix), stats.resource_path.get_file().get_basename()])
+    return prefix
+```
+### 2. UI 设计
+节点 Fusion_UI 挂载到 Player 节点上。交互逻辑：
 
-点击敌人的 CustomCard 资源后，显示在 Player 两侧，当且仅当选择两个敌人卡牌后才能融合。
+点击 Player 节点 → 显示 Fusion_UI 上的 FusionUp 子节点
+
+再次点击 FusionUp 节点 → 显示 cards 数组里已击败敌人对应的 CustomCard 资源
+
+点击敌人的 CustomCard 资源 → 卡片显示在 Player 两侧
+
+融合条件：必须且仅能选择两张敌人卡牌，才能触发融合
 
 FusionUI 结构如下：
 
-text
+```
 Fusion_UI
 ├─ OrbitL
 │  └─ LeftSlot
@@ -58,9 +61,10 @@ Fusion_UI
 │  └─ Area2D
 │     └─ CollisionShape2D
 └─ AnimationPlayer
+```
 Player 结构如下：
 
-text
+```
 Player
 ├─ Sprite2D
 ├─ StatsUI
@@ -72,16 +76,15 @@ Player
 ├─ Area2D
 │  └─ CollisionShape2D
 └─ Fusion_UI
-3. HTTP 请求
-本次 img2img 模型用的是 seedream5.0 lite。生成新的角色原画时，传入两个敌人原画加上 player 角色原画，一共三张图片。
+```
+###3. HTTP 请求
+本次使用的 img2img 模型为 seedream5.0 lite。融合时需要传入三张图片：两张敌人原画 + 玩家角色原画。
 
-注意：seedream5.0 lite 传入的图片必须是 base64 格式。
-
+**⚠️ 注意：该模型要求图片必须为 base64 格式。**
 实现步骤：
 
-将 Texture2D 转化为 base64 格式：
-
-gdscript
+*1. 将 Texture2D 转化为 base64 格式：*
+```
 var base64_array: Array[String] = []
 for tex in input_textures:
     var b64 = texture_to_base64(tex)
@@ -103,9 +106,9 @@ var payload = {
     "strength": strength,
     "response_format": "b64_json"   # 必须为 b64_json
 }
-将返回的 base64 转化为 jpg：
-
-gdscript
+```
+*2.将返回的 base64 转化为 jpg：*
+```
 var json = JSON.parse_string(body.get_string_from_utf8())
 if not json or not json.has("data"):
     print("返回格式错误")
@@ -120,9 +123,9 @@ if img.load_jpg_from_buffer(bytes) == OK:
     callback.call(final_texture)
 else:
     print("图片加载失败")
-由于生成的图片背景是全白，最后需要调整透明度：
-
-gdscript
+```
+*3.由于生成的图片背景是全白，最后需要调整透明度:*
+```
 func make_texture_white_transparent(tex: Texture2D) -> Texture2D:
     if not tex:
         return null
@@ -138,3 +141,6 @@ func make_texture_white_transparent(tex: Texture2D) -> Texture2D:
                 img.set_pixel(x, y, Color(1,1,1,0))
 
     return ImageTexture.create_from_image(img)
+```
+
+
