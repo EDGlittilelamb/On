@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch010xjm7fg1"]
+
+[ext_resource type="Script" uid="uid://bk2olywmlgof7" path="res://monster_card.gd" id="1_4dmkr"]
+[ext_resource type="Texture2D" uid="uid://dc7crere7e7ow" path="res://art/tile_0099.png" id="2_4dmkr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dmkr"]
+size = Vector2(16, 16)
+
+[node name="MonsterCard" type="Control"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 44.0
+offset_bottom = 44.0
+size_flags_horizontal = 3
+script = ExtResource("1_4dmkr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_4dmkr")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_4dmkr")

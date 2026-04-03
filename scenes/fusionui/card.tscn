@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs5dd225jbbox"]
+
+[ext_resource type="Texture2D" uid="uid://cpydvk8mq66o5" path="res://art/tile_0087.png" id="1_mok3c"]
+[ext_resource type="Script" uid="uid://dfpn5fkdhv0pp" path="res://scenes/fusionui/card.gd" id="1_xs6o3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xs6o3"]
+size = Vector2(12, 11.5)
+
+[node name="Card" type="Control"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 1
+script = ExtResource("1_xs6o3")
+
+[node name="img" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_mok3c")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_xs6o3")

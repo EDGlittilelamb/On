@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8y5p2isdw71l"]
+
+[ext_resource type="Script" uid="uid://c6uaqgc40q4on" path="res://monster_cards_pile.gd" id="1_8myb3"]
+[ext_resource type="PackedScene" uid="uid://ch010xjm7fg1" path="res://monster_card.tscn" id="2_jrnq2"]
+[ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="3_6i4cx"]
+[ext_resource type="Texture2D" uid="uid://bue8imscpldys" path="res://art/tile_0097.png" id="4_t54cg"]
+[ext_resource type="Texture2D" uid="uid://dc7crere7e7ow" path="res://art/tile_0099.png" id="5_qm51l"]
+[ext_resource type="Texture2D" uid="uid://dl3a87y1bxtt8" path="res://art/tile_0096.png" id="6_y82c3"]
+
+[node name="MonsterCardsPile" type="Control"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 66.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+script = ExtResource("1_8myb3")
+monster_card_scene = ExtResource("2_jrnq2")
+monster_textures = Array[Texture2D]([ExtResource("3_6i4cx"), ExtResource("4_t54cg"), ExtResource("5_qm51l"), ExtResource("6_y82c3")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 66.0
+offset_bottom = 60.0
+color = Color(1, 1, 1, 0.08235294)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 0
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 56.0
+offset_bottom = 52.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MonsterCard" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_jrnq2")]
+layout_mode = 2
+
+[node name="MonsterCard2" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_jrnq2")]
+layout_mode = 2
+
+[node name="MonsterCard3" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_jrnq2")]
+layout_mode = 2
+
+[node name="MonsterCard4" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_jrnq2")]
+layout_mode = 2
+
+[node name="MonsterCard5" parent="ScrollContainer/VBoxContainer" instance=ExtResource("2_jrnq2")]
+layout_mode = 2

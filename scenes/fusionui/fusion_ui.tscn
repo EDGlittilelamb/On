@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvvve30dl1d8p"]
+
+[ext_resource type="Texture2D" uid="uid://okqjyfvxrmsp" path="res://art/Cat.png" id="1_445j5"]
+[ext_resource type="Script" uid="uid://bj2fakhcx5rlc" path="res://scenes/fusionui/fusion_ui.gd" id="1_icrwm"]
+[ext_resource type="PackedScene" uid="uid://bs5dd225jbbox" path="res://scenes/fusionui/card.tscn" id="2_hgmdw"]
+[ext_resource type="Texture2D" uid="uid://cwf6dyi56tgo" path="res://art/tile_0088.png" id="4_0bp7i"]
+[ext_resource type="Texture2D" uid="uid://dc7crere7e7ow" path="res://art/tile_0099.png" id="5_il2rf"]
+[ext_resource type="Texture2D" uid="uid://cw4qsn0ys48u8" path="res://art/Boss.png" id="6_il2rf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_icrwm"]
+size = Vector2(90.00001, 90.00004)
+
+[node name="Fusion_UI" type="Node2D"]
+script = ExtResource("1_icrwm")
+card_scene = ExtResource("2_hgmdw")
+
+[node name="OrbitL" type="Node2D" parent="."]
+
+[node name="LeftSlot" type="Sprite2D" parent="OrbitL"]
+position = Vector2(-21, 3)
+texture = ExtResource("4_0bp7i")
+
+[node name="OrbitR" type="Node2D" parent="."]
+
+[node name="RightSlot" type="Sprite2D" parent="OrbitR"]
+position = Vector2(23, 3)
+texture = ExtResource("5_il2rf")
+
+[node name="Confirm" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.000004
+offset_top = -18.000004
+offset_right = 121.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_445j5")
+
+[node name="Area2D" type="Area2D" parent="Confirm"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Confirm/Area2D"]
+position = Vector2(64.99999, 65.00001)
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_icrwm")
+
+[node name="Pile" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(10, 0)
+offset_left = -19.0
+offset_top = 29.0
+offset_right = 21.0
+offset_bottom = 69.0
+
+[node name="FusionUp" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = 16.999996
+offset_right = 121.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("6_il2rf")
+
+[node name="Area2D" type="Area2D" parent="FusionUp"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FusionUp/Area2D"]
+position = Vector2(64.99999, 65.00001)
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_icrwm")

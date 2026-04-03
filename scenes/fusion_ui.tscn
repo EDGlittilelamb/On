@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4w71mi7av71d"]
+
+[ext_resource type="Script" uid="uid://cepgb4sps34qw" path="res://fusion_ui.gd" id="1_fg2t0"]
+[ext_resource type="Texture2D" uid="uid://okqjyfvxrmsp" path="res://art/Cat.png" id="1_vx0lk"]
+[ext_resource type="Texture2D" uid="uid://cw4qsn0ys48u8" path="res://art/Boss.png" id="2_fg2t0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wp42i"]
+size = Vector2(8, 8)
+
+[node name="FusionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_fg2t0")
+
+[node name="Fusion" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fusion"]
+shape = SubResource("RectangleShape2D_wp42i")
+
+[node name="Sprite2D" type="Sprite2D" parent="Fusion"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_vx0lk")
+
+[node name="Cancel" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cancel"]
+shape = SubResource("RectangleShape2D_wp42i")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cancel"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_fg2t0")
