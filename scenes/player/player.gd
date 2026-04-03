@@ -15,6 +15,9 @@ func _ready() -> void:
 	area.input_event.connect(_on_player_clicked)
 
 func _on_player_clicked(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and fusion_ui._is_fusing:
+		sprite_2d.scale = Vector2(1.0,1.0)
+		sprite_2d.texture = fusion_ui.original_tex
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		fusion_ui.show_confirm_only()
 

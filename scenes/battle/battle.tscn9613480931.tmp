@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cahno8aso5net"]
+[gd_scene load_steps=24 format=3 uid="uid://cahno8aso5net"]
 
 [ext_resource type="Script" uid="uid://dddldnx2adi23" path="res://scenes/battle/battle.gd" id="1_4s751"]
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_ybkl6"]
@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://c7c8cgkuro8b3" path="res://art/discard.png" id="18_g47ei"]
 [ext_resource type="PackedScene" uid="uid://d2jq2r5hb1ajk" path="res://scenes/ui/card_pile_view.tscn" id="21_rnul2"]
 [ext_resource type="PackedScene" uid="uid://c3fu2yk5vm3qb" path="res://scenes/ui/status_view.tscn" id="22_kfjwu"]
-[ext_resource type="Script" uid="uid://dt7diy6piykov" path="res://addons/seedreamapi/AIManager.gd" id="23_156m4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xyg5u"]
 size = Vector2(256, 100)
@@ -200,10 +199,3 @@ layer = 4
 
 [node name="StatusView" parent="StatusViewLayer" instance=ExtResource("22_kfjwu")]
 visible = false
-
-[node name="AIManager" type="Node" parent="."]
-script = ExtResource("23_156m4")
-api_key = "02dc041a-4c2e-497a-91d8-a9fc47d03bd3"
-metadata/_custom_type_script = "uid://dt7diy6piykov"
-
-[node name="HTTPRequest" type="HTTPRequest" parent="AIManager"]

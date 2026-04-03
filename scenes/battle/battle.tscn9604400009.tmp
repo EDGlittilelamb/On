@@ -203,7 +203,4 @@ visible = false
 
 [node name="AIManager" type="Node" parent="."]
 script = ExtResource("23_156m4")
-api_key = "02dc041a-4c2e-497a-91d8-a9fc47d03bd3"
 metadata/_custom_type_script = "uid://dt7diy6piykov"
-
-[node name="HTTPRequest" type="HTTPRequest" parent="AIManager"]
