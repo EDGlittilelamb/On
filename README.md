@@ -77,7 +77,7 @@ Player
 │  └─ CollisionShape2D
 └─ Fusion_UI
 ```
-###3. HTTP 请求
+###3. HTTP 请求###
 本次使用的 img2img 模型为 seedream5.0 lite。融合时需要传入三张图片：两张敌人原画 + 玩家角色原画。
 
 **⚠️ 注意：该模型要求图片必须为 base64 格式。**
